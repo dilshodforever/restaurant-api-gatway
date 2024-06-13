@@ -1,43 +1,35 @@
 
 # Restaurant reservation system
 
+The API Gateway Microservice acts as a single entry point for the restaurant reservation system, aggregating and routing requests to the appropriate microservices (e.g., reservation, payment, authorization). It handles request validation, response aggregation, rate limiting, and security.
 
-Creating a restaurant reservation system. Through this system, users will be able to book restaurant tables, select meals, pay, and restaurant management will be able to manage reservations.
+## Overview
+
+This microservice provides APIs to:
+- **Route Requests**: Forward client requests to the appropriate microservices.
+- **Aggregate Responses**: Combine responses from multiple microservices into a single response.
+- **Handle Security**: Implement authentication and authorization checks.
+- **Manage Rate Limiting**: Control the rate of incoming requests to prevent abuse.
+
+## Technologies
+
+- **Language**: Go (Golang)
+- **API**: RESTful
+- **Middleware**: Gorilla Mux, JWT Middleware
+- **API Gateway Framework**: Kong, NGINX, or custom-built
+
 ## Installation
 
-### 1. Initialize a git repository and clone the project:
+To set up the API Gateway Microservice, follow these steps:
 
-##
+### Prerequisites
 
+- Go (version 1.16+)
+- Kong or NGINX if using an existing API Gateway framework
 
-**Clone Authourization Service:**
-```bash
-  git init
-  git clone git@github.com:dilshodforever/restaurant-auth.git
-```
+### Setup
 
-**Clone Reservation Service:**
-    
-```bash
-  git init
-  git clone git@github.com:dilshodforever/reservation-service.git
-```
-
-**Clone Payment Service:** 
-
-```bash
-  git init
-  git clone git@github.com:dilshodforever/payment-service.git
-```
-
-**Clone Submodels:**
-
-```bash
-  git init
-  git clone git@github.com:dilshodforever/restaurant-submodule.git
-```
-
-**Clone API Gateway:** 
+### 1. Clone the Repository
 
 ```bash
     git init 
@@ -45,21 +37,31 @@ Creating a restaurant reservation system. Through this system, users will be abl
 ```
 
 
-### 2. Create a database named reservation on port: 5432
+### 2. Install Dependencies
 
-
-### 3. Update the .env file with the appropriate configuration.
-
-```.env
-    HTTPPort=:7070
-    PostgresHost=localhost
-    PostgresPort=5432
-    PostgresUser=postgres
-    PostgresPassword=root
-    PostgresDatabase=reservation
+```
+go mod tidy
 ```
 
-### 4. Use the following Makefile commands to manage the database migrations and  set up the project:
+
+### 3. Configure Environment Variables.
+
+```.env
+AUTH_SERVICE_URL=http://localhost:8081
+RESERVATION_SERVICE_URL=http://localhost:8082
+PAYMENT_SERVICE_URL=http://localhost:8083
+JWT_SECRET=your_jwt_secret_key
+
+```
+
+### 4. Start the Microservice
+
+```
+go run cmd/server/main.go
+```
+
+
+### 5. Use the following Makefile commands to manage the database migrations and  set up the project:
 
 ```makefile
 CURRENT_DIR=$(shell pwd)
@@ -71,47 +73,15 @@ SWAGGER_INIT := $(SWAGGER) init -g ./api/api.go -o $(SWAGGER_DOCS)
 
 swag-gen:
   $(SWAGGER_INIT)
-
-proto-gen:
-	./scripts/gen-proto.sh ${CURRENT_DIR}
-
-mig-up:
-	migrate -path migrations -database '$(DBURL)' -verbose up
-
-mig-down:
-	migrate -path migrations -database '$(DBURL)' -verbose down
-
-mig-create:
-	migrate create -ext sql -dir migrations -seq create_table
-
-mig-insert:
-	migrate create -ext sql -dir db/migrations -seq insert_table
-
 ```
 
-### 5. Open the following URL to access the Swagger documentation:
+### 6. Open the following URL to access the Swagger documentation:
 
 ```
 http://localhost:8080/api/swagger/index.html#/
 ```
 
 
-        
-
-    
-    
-
-## Technologies
-
-**Microservice:** Each service runs as an independent microservice.
-
-**Auth Service:** User authentication and authorization
-
-**API Gateway:** Consolidate all services in the system and provide a single access point
-
-**PostgreSQL:** As a database.
-
-**Gin:** Go framework for developing backend applications
 
 ## Acknowledgements
 
