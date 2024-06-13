@@ -4,7 +4,10 @@ import (
 	pb "github.com/dilshodforever/restaurant-submodule/genprotos"
 	"github.com/gin-gonic/gin"
 )
-
+type Payments struct{
+	Paymen *pb.GetAllPayments
+	Reservations *pb.GetAllReservations
+}
 // CreatePayment 	handles the creation of a new Payment
 // @Summary 		Create Payment
 // @Description 	Create page
@@ -78,19 +81,30 @@ func (h *Handler) DeletePayment(ctx *gin.Context) {
 // @Accept  		json
 // @Produce  		json
 // @Param 			query  query   pb.Payment   true   "Query parameter"
-// @Success 		200  {object}  pb.GetAllPayments   "GetAll Successful"
+// @Success 		200  {object}  Payments{}  "GetAll Successful"
 // @Failure 		401  {string}  string  			   "Error while GetAlld"
-// @Router 			/Payment/getall [get]
+// @Router 			/payment/getall [get]
 func (h *Handler) GetAllPayment(ctx *gin.Context) {
 	payment := &pb.Payment{}
 	payment.PaymentMethod = ctx.Param("payment_method")
 	payment.PaymentStatus = ctx.Param("payment_status")
-
-	res, err := h.Payment.GetAllPayment(ctx, payment)
+	pays:=Payments{}
+	pay, err := h.Payment.GetAllPayment(ctx, payment)
 	if err != nil {
 		panic(err)
 	}
-	ctx.JSON(200, res)
+	reservation := &pb.Reservation{}
+	reservation.ReservationTime = ctx.Param("reservation_time")
+	reservation.Status = ctx.Param("status")
+
+	res, err:=h.Reservation.GetAllReservation(ctx, reservation)
+	if err != nil {
+		panic(err)
+	}
+	pays.Paymen=pay
+	pays.Reservations=res
+
+	ctx.JSON(200, pays)
 }
 
 // GetByIdPayment 	handles the creation of a new Payment

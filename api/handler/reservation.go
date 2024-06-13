@@ -6,6 +6,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+
+
 // CreateReservation 	handles the creation of a new Reservation
 // @Summary 			Create Reservation
 // @Description 		Create page
@@ -30,7 +32,8 @@ func (h *Handler) CreateReservation(ctx *gin.Context) {
 	}
 	_, err = h.Reservation.CreateReservation(ctx, &arr)
 	if err != nil {
-		panic(err)
+		ctx.JSON(400, err.Error())
+		return
 	}
 	ctx.JSON(200, "Sucsess!!!")
 }
@@ -109,7 +112,7 @@ func (h *Handler) GetAllReservation(ctx *gin.Context) {
 // @Param    			id    path    string    true   "Reservation ID"
 // @Success 			200 {object}  pb.Reservation   "GetById Successful"
 // @Failure 			401 {string}  string 		   "Error while GetByIdd"
-// @Router 				/Reservation/getbyid/{id} [get]
+// @Router 				/reservation/getbyid/{id} [get]
 func (h *Handler) GetbyIdReservation(ctx *gin.Context) {
 	id := pb.ById{Id: ctx.Param("id")}
 	res, err := h.Reservation.GetByIdReservation(ctx, &id)
@@ -117,4 +120,29 @@ func (h *Handler) GetbyIdReservation(ctx *gin.Context) {
 		panic(err)
 	}
 	ctx.JSON(200, res)
+}
+
+
+
+// CreateReservation 	handles the creation of a new Reservation
+// @Summary 			Create Reservation
+// @Description 		Create page
+// @Tags 				Reservation
+// @Accept  			json
+// @Produce  			json
+// @Param   			Create   body    pb.Reservation   true   "Create"
+// @Success 			200    {string}  string          "Create Successful"
+// @Failure 			401    {string}  string          "Error while Created"
+// @Router       		/reservation/bron [post]
+func (h *Handler) Reservations(ctx *gin.Context) {
+	arr := pb.Reservation{}
+	err := ctx.BindJSON(&arr)
+	if err != nil {
+		panic(err)
+	}
+	_, err = h.Reservation.Reservations(ctx, &arr)
+	if err != nil {
+		panic(err)
+	}
+	ctx.JSON(200, "Sucsess!!!")
 }

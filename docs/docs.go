@@ -66,6 +66,33 @@ const docTemplate = `{
                     "Menu"
                 ],
                 "summary": "GetAll Menu",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "description",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "number",
+                        "name": "price",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "restaurant_id",
+                        "in": "query"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "GetAll Successful",
@@ -237,36 +264,7 @@ const docTemplate = `{
                         }
                     },
                     "401": {
-                        "description": "Error while Deleted",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
-        "/Payment/getall": {
-            "get": {
-                "description": "GetAll page",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Payment"
-                ],
-                "summary": "GetAll Payment",
-                "responses": {
-                    "200": {
-                        "description": "GetAll Successful",
-                        "schema": {
-                            "$ref": "#/definitions/genprotos.GetAllPayments"
-                        }
-                    },
-                    "401": {
-                        "description": "Error while GetAlld",
+                        "description": "Error  while Deleted",
                         "schema": {
                             "type": "string"
                         }
@@ -397,44 +395,6 @@ const docTemplate = `{
                 }
             }
         },
-        "/Reservation/getbyid/{id}": {
-            "get": {
-                "description": "GetById page",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Reservation"
-                ],
-                "summary": "GetById Reservation",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Reservation ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "GetById Successful",
-                        "schema": {
-                            "$ref": "#/definitions/genprotos.Reservation"
-                        }
-                    },
-                    "401": {
-                        "description": "Error while GetByIdd",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
         "/Reservation/update/{id}": {
             "put": {
                 "description": "Update page",
@@ -533,6 +493,28 @@ const docTemplate = `{
                     "ReservationOrder"
                 ],
                 "summary": "GetAll ReservationOrder",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "menu_item_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "quantity",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "reservation_id",
+                        "in": "query"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "GetAll Successful",
@@ -542,44 +524,6 @@ const docTemplate = `{
                     },
                     "401": {
                         "description": "Error while GetAlld",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
-        "/ReservationOrder/getbyid/{id}": {
-            "get": {
-                "description": "GetById page",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "ReservationOrder"
-                ],
-                "summary": "GetById ReservationOrder",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "ReservationOrder ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "GetById Successful",
-                        "schema": {
-                            "$ref": "#/definitions/genprotos.ReservationOrder"
-                        }
-                    },
-                    "401": {
-                        "description": "Error while GetByIdd",
                         "schema": {
                             "type": "string"
                         }
@@ -674,6 +618,62 @@ const docTemplate = `{
                 }
             }
         },
+        "/payment/getall": {
+            "get": {
+                "description": "GetAll page",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Payment"
+                ],
+                "summary": "GetAll Payment",
+                "parameters": [
+                    {
+                        "type": "number",
+                        "name": "amount",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "payment_method",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "payment_status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "reservation_id",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "GetAll Successful",
+                        "schema": {
+                            "$ref": "#/definitions/handler.Payments"
+                        }
+                    },
+                    "401": {
+                        "description": "Error while GetAlld",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/public_vote/create": {
             "post": {
                 "description": "Create page",
@@ -695,6 +695,46 @@ const docTemplate = `{
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/genprotos.ReservationOrder"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Create Successful",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Error while Created",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/reservation/bron": {
+            "post": {
+                "description": "Create page",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Reservation"
+                ],
+                "summary": "Create Reservation",
+                "parameters": [
+                    {
+                        "description": "Create",
+                        "name": "Create",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/genprotos.Reservation"
                         }
                     }
                 ],
@@ -781,6 +821,33 @@ const docTemplate = `{
                     "Reservation"
                 ],
                 "summary": "GetAll Reservation",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "reservation_time",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "restaurant_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "user_id",
+                        "in": "query"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "GetAll Successful",
@@ -790,6 +857,82 @@ const docTemplate = `{
                     },
                     "401": {
                         "description": "Error while GetAlld",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/reservation/getbyid/{id}": {
+            "get": {
+                "description": "GetById page",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Reservation"
+                ],
+                "summary": "GetById Reservation",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Reservation ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "GetById Successful",
+                        "schema": {
+                            "$ref": "#/definitions/genprotos.Reservation"
+                        }
+                    },
+                    "401": {
+                        "description": "Error while GetByIdd",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/reservationOrder/getbyid/{id}": {
+            "get": {
+                "description": "GetById page",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "ReservationOrder"
+                ],
+                "summary": "GetById ReservationOrder",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ReservationOrder ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "GetById Successful",
+                        "schema": {
+                            "$ref": "#/definitions/genprotos.ReservationOrder"
+                        }
+                    },
+                    "401": {
+                        "description": "Error while GetByIdd",
                         "schema": {
                             "type": "string"
                         }
@@ -888,6 +1031,33 @@ const docTemplate = `{
                     "Restoran"
                 ],
                 "summary": "GetAll Restoran",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "address",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "description",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "phone_number",
+                        "in": "query"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "GetAll Successful",
@@ -1142,18 +1312,29 @@ const docTemplate = `{
                     "type": "string"
                 }
             }
+        },
+        "handler.Payments": {
+            "type": "object",
+            "properties": {
+                "paymen": {
+                    "$ref": "#/definitions/genprotos.GetAllPayments"
+                },
+                "reservations": {
+                    "$ref": "#/definitions/genprotos.GetAllReservations"
+                }
+            }
         }
     }
 }`
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "",
-	Host:             "",
-	BasePath:         "",
+	Version:          "1.0",
+	Host:             "localhost:8080",
+	BasePath:         "/",
 	Schemes:          []string{},
 	Title:            "",
-	Description:      "",
+	Description:      "Voting service",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

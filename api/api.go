@@ -31,6 +31,7 @@ func NewGin(h *handler.Handler) *gin.Engine {
 	re.DELETE("/delete/:id", h.DeleteReservation)
 	re.GET("/getall", h.GetAllReservation)
 	re.GET("/getbyid/:id", h.GetbyIdReservation)
+	re.POST("/bron", h.Reservations)
 
 	res := r.Group("/reservationOrder")
 	res.POST("/create", h.CreateReservationOrder)
@@ -46,7 +47,7 @@ func NewGin(h *handler.Handler) *gin.Engine {
 	menu.GET("/getall", h.GetAllMenu)
 	menu.GET("/getbyid/:id", h.GetByIdMenu)
 
-	payment := r.Group("/menu")
+	payment := r.Group("/payment")
 	payment.POST("/create", h.CreatePayment)
 	payment.PUT("/update/:id", h.UpdatePayment)
 	payment.DELETE("/delete/:id", h.DeletePayment)

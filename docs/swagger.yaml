@@ -1,3 +1,4 @@
+basePath: /
 definitions:
   genprotos.GetAllMenus:
     properties:
@@ -97,8 +98,18 @@ definitions:
       phone_number:
         type: string
     type: object
+  handler.Payments:
+    properties:
+      paymen:
+        $ref: '#/definitions/genprotos.GetAllPayments'
+      reservations:
+        $ref: '#/definitions/genprotos.GetAllReservations'
+    type: object
+host: localhost:8080
 info:
   contact: {}
+  description: Voting service
+  version: "1.0"
 paths:
   /Menu/delete/{id}:
     delete:
@@ -130,6 +141,22 @@ paths:
       consumes:
       - application/json
       description: GetAll page
+      parameters:
+      - in: query
+        name: description
+        type: string
+      - in: query
+        name: id
+        type: string
+      - in: query
+        name: name
+        type: string
+      - in: query
+        name: price
+        type: number
+      - in: query
+        name: restaurant_id
+        type: string
       produces:
       - application/json
       responses:
@@ -245,29 +272,10 @@ paths:
           schema:
             type: string
         "401":
-          description: Error while Deleted
+          description: Error  while Deleted
           schema:
             type: string
       summary: Delete Payment
-      tags:
-      - Payment
-  /Payment/getall:
-    get:
-      consumes:
-      - application/json
-      description: GetAll page
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: GetAll Successful
-          schema:
-            $ref: '#/definitions/genprotos.GetAllPayments'
-        "401":
-          description: Error while GetAlld
-          schema:
-            type: string
-      summary: GetAll Payment
       tags:
       - Payment
   /Payment/getbyid/{id}:
@@ -351,31 +359,6 @@ paths:
       summary: Delete Reservation
       tags:
       - Reservation
-  /Reservation/getbyid/{id}:
-    get:
-      consumes:
-      - application/json
-      description: GetById page
-      parameters:
-      - description: Reservation ID
-        in: path
-        name: id
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: GetById Successful
-          schema:
-            $ref: '#/definitions/genprotos.Reservation'
-        "401":
-          description: Error while GetByIdd
-          schema:
-            type: string
-      summary: GetById Reservation
-      tags:
-      - Reservation
   /Reservation/update/{id}:
     put:
       consumes:
@@ -437,6 +420,19 @@ paths:
       consumes:
       - application/json
       description: GetAll page
+      parameters:
+      - in: query
+        name: id
+        type: string
+      - in: query
+        name: menu_item_id
+        type: string
+      - in: query
+        name: quantity
+        type: string
+      - in: query
+        name: reservation_id
+        type: string
       produces:
       - application/json
       responses:
@@ -449,31 +445,6 @@ paths:
           schema:
             type: string
       summary: GetAll ReservationOrder
-      tags:
-      - ReservationOrder
-  /ReservationOrder/getbyid/{id}:
-    get:
-      consumes:
-      - application/json
-      description: GetById page
-      parameters:
-      - description: ReservationOrder ID
-        in: path
-        name: id
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: GetById Successful
-          schema:
-            $ref: '#/definitions/genprotos.ReservationOrder'
-        "401":
-          description: Error while GetByIdd
-          schema:
-            type: string
-      summary: GetById ReservationOrder
       tags:
       - ReservationOrder
   /ReservationOrder/update/{id}:
@@ -533,6 +504,41 @@ paths:
       summary: Create Menu
       tags:
       - Menu
+  /payment/getall:
+    get:
+      consumes:
+      - application/json
+      description: GetAll page
+      parameters:
+      - in: query
+        name: amount
+        type: number
+      - in: query
+        name: id
+        type: string
+      - in: query
+        name: payment_method
+        type: string
+      - in: query
+        name: payment_status
+        type: string
+      - in: query
+        name: reservation_id
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetAll Successful
+          schema:
+            $ref: '#/definitions/handler.Payments'
+        "401":
+          description: Error while GetAlld
+          schema:
+            type: string
+      summary: GetAll Payment
+      tags:
+      - Payment
   /public_vote/create:
     post:
       consumes:
@@ -559,6 +565,32 @@ paths:
       summary: Create Public_Vote
       tags:
       - ReservationOrder
+  /reservation/bron:
+    post:
+      consumes:
+      - application/json
+      description: Create page
+      parameters:
+      - description: Create
+        in: body
+        name: Create
+        required: true
+        schema:
+          $ref: '#/definitions/genprotos.Reservation'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Create Successful
+          schema:
+            type: string
+        "401":
+          description: Error while Created
+          schema:
+            type: string
+      summary: Create Reservation
+      tags:
+      - Reservation
   /reservation/create/{user_id}/{restaurant_id}:
     post:
       consumes:
@@ -600,6 +632,22 @@ paths:
       consumes:
       - application/json
       description: GetAll page
+      parameters:
+      - in: query
+        name: id
+        type: string
+      - in: query
+        name: reservation_time
+        type: string
+      - in: query
+        name: restaurant_id
+        type: string
+      - in: query
+        name: status
+        type: string
+      - in: query
+        name: user_id
+        type: string
       produces:
       - application/json
       responses:
@@ -614,6 +662,56 @@ paths:
       summary: GetAll Reservation
       tags:
       - Reservation
+  /reservation/getbyid/{id}:
+    get:
+      consumes:
+      - application/json
+      description: GetById page
+      parameters:
+      - description: Reservation ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetById Successful
+          schema:
+            $ref: '#/definitions/genprotos.Reservation'
+        "401":
+          description: Error while GetByIdd
+          schema:
+            type: string
+      summary: GetById Reservation
+      tags:
+      - Reservation
+  /reservationOrder/getbyid/{id}:
+    get:
+      consumes:
+      - application/json
+      description: GetById page
+      parameters:
+      - description: ReservationOrder ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetById Successful
+          schema:
+            $ref: '#/definitions/genprotos.ReservationOrder'
+        "401":
+          description: Error while GetByIdd
+          schema:
+            type: string
+      summary: GetById ReservationOrder
+      tags:
+      - ReservationOrder
   /restoran/create:
     post:
       consumes:
@@ -670,6 +768,22 @@ paths:
       consumes:
       - application/json
       description: GetAll page
+      parameters:
+      - in: query
+        name: address
+        type: string
+      - in: query
+        name: description
+        type: string
+      - in: query
+        name: id
+        type: string
+      - in: query
+        name: name
+        type: string
+      - in: query
+        name: phone_number
+        type: string
       produces:
       - application/json
       responses:
