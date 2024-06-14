@@ -48,7 +48,7 @@ func (h *Handler) CreateReservation(ctx *gin.Context) {
 // @Param   			Update   body    pb.Reservation  true   "Update"
 // @Success 			200    {string}  string         "Update Successful"
 // @Failure 			401    {string}  string         "Error while created"
-// @Router 				/Reservation/update/{id} [put]
+// @Router 				/reservation/update/{id} [put]
 func (h *Handler) UpdateReservation(ctx *gin.Context) {
 	arr := pb.Reservation{Id: ctx.Param("id")}
 	err := ctx.BindJSON(&arr)
@@ -71,7 +71,7 @@ func (h *Handler) UpdateReservation(ctx *gin.Context) {
 // @Param     			id path string true "Reservation ID"
 // @Success 			200 {string} string  "Delete Successful"
 // @Failure 			401 {string} string  "Error while Deleted"
-// @Router 				/Reservation/delete/{id} [delete]
+// @Router 				/reservation/delete/{id} [delete]
 func (h *Handler) DeleteReservation(ctx *gin.Context) {
 	id := pb.ById{Id: ctx.Param("id")}
 	_, err := h.Reservation.DeleteReservation(ctx, &id)

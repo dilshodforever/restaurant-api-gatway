@@ -15,7 +15,47 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/Menu/delete/{id}": {
+        "/menu/create": {
+            "post": {
+                "description": "Create page",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Menu"
+                ],
+                "summary": "Create Menu",
+                "parameters": [
+                    {
+                        "description": "Create",
+                        "name": "Create",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/genprotos.Menu"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Create Successful",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Error while Created",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/menu/delete/{id}": {
             "delete": {
                 "description": "Delete page",
                 "consumes": [
@@ -53,7 +93,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/Menu/getall": {
+        "/menu/getall": {
             "get": {
                 "description": "GetAll page",
                 "consumes": [
@@ -109,7 +149,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/Menu/getbyid/{id}": {
+        "/menu/getbyid/{id}": {
             "get": {
                 "description": "GetById page",
                 "consumes": [
@@ -147,7 +187,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/Menu/update/{id}": {
+        "/menu/update/{id}": {
             "put": {
                 "description": "Update page",
                 "consumes": [
@@ -194,7 +234,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/Payment/create": {
+        "/payment/create": {
             "post": {
                 "description": "Create page",
                 "consumes": [
@@ -234,7 +274,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/Payment/delete/{id}": {
+        "/payment/delete/{id}": {
             "delete": {
                 "description": "Delete page",
                 "consumes": [
@@ -265,352 +305,6 @@ const docTemplate = `{
                     },
                     "401": {
                         "description": "Error  while Deleted",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
-        "/Payment/getbyid/{id}": {
-            "get": {
-                "description": "GetById page",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Payment"
-                ],
-                "summary": "GetById Payment",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Payment ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "GetById Successful",
-                        "schema": {
-                            "$ref": "#/definitions/genprotos.Payment"
-                        }
-                    },
-                    "401": {
-                        "description": "Error while GetByIdd",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
-        "/Payment/update/{id}": {
-            "put": {
-                "description": "Update page",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Payment"
-                ],
-                "summary": "Update Payment",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Payment ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    },
-                    {
-                        "description": "Update",
-                        "name": "Update",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/genprotos.Payment"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Update Successful",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "401": {
-                        "description": "Error while created",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
-        "/Reservation/delete/{id}": {
-            "delete": {
-                "description": "Delete page",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Reservation"
-                ],
-                "summary": "Delete Reservation",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Reservation ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Delete Successful",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "401": {
-                        "description": "Error while Deleted",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
-        "/Reservation/update/{id}": {
-            "put": {
-                "description": "Update page",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Reservation"
-                ],
-                "summary": "Update Reservation",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Reservation ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    },
-                    {
-                        "description": "Update",
-                        "name": "Update",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/genprotos.Reservation"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Update Successful",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "401": {
-                        "description": "Error while created",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
-        "/ReservationOrder/delete/{id}": {
-            "delete": {
-                "description": "Delete page",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "ReservationOrder"
-                ],
-                "summary": "Delete ReservationOrder",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "ReservationOrder ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Delete Successful",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "401": {
-                        "description": "Error while Deleted",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
-        "/ReservationOrder/getall": {
-            "get": {
-                "description": "GetAll page",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "ReservationOrder"
-                ],
-                "summary": "GetAll ReservationOrder",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "name": "id",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "name": "menu_item_id",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "name": "quantity",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "name": "reservation_id",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "GetAll Successful",
-                        "schema": {
-                            "$ref": "#/definitions/genprotos.GetAllReservationOrders"
-                        }
-                    },
-                    "401": {
-                        "description": "Error while GetAlld",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
-        "/ReservationOrder/update/{id}": {
-            "put": {
-                "description": "Update page",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "ReservationOrder"
-                ],
-                "summary": "Update ReservationOrder",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "ReservationOrder ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    },
-                    {
-                        "description": "Update",
-                        "name": "Update",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/genprotos.ReservationOrder"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Update Successful",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "401": {
-                        "description": "Error while created",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
-        "/menu/create": {
-            "post": {
-                "description": "Create page",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Menu"
-                ],
-                "summary": "Create Menu",
-                "parameters": [
-                    {
-                        "description": "Create",
-                        "name": "Create",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/genprotos.Menu"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Create Successful",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "401": {
-                        "description": "Error while Created",
                         "schema": {
                             "type": "string"
                         }
@@ -667,6 +361,91 @@ const docTemplate = `{
                     },
                     "401": {
                         "description": "Error while GetAlld",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/payment/getbyid/{id}": {
+            "get": {
+                "description": "GetById page",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Payment"
+                ],
+                "summary": "GetById Payment",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Payment ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "GetById Successful",
+                        "schema": {
+                            "$ref": "#/definitions/genprotos.Payment"
+                        }
+                    },
+                    "401": {
+                        "description": "Error while GetByIdd",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/payment/update/{id}": {
+            "put": {
+                "description": "Update page",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Payment"
+                ],
+                "summary": "Update Payment",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Payment ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update",
+                        "name": "Update",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/genprotos.Payment"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Update Successful",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Error while created",
                         "schema": {
                             "type": "string"
                         }
@@ -808,6 +587,44 @@ const docTemplate = `{
                 }
             }
         },
+        "/reservation/delete/{id}": {
+            "delete": {
+                "description": "Delete page",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Reservation"
+                ],
+                "summary": "Delete Reservation",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Reservation ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Delete Successful",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Error while Deleted",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/reservation/getall": {
             "get": {
                 "description": "GetAll page",
@@ -902,6 +719,142 @@ const docTemplate = `{
                 }
             }
         },
+        "/reservation/update/{id}": {
+            "put": {
+                "description": "Update page",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Reservation"
+                ],
+                "summary": "Update Reservation",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Reservation ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update",
+                        "name": "Update",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/genprotos.Reservation"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Update Successful",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Error while created",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/reservationOrder/delete/{id}": {
+            "delete": {
+                "description": "Delete page",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "ReservationOrder"
+                ],
+                "summary": "Delete ReservationOrder",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ReservationOrder ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Delete Successful",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Error while Deleted",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/reservationOrder/getall": {
+            "get": {
+                "description": "GetAll page",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "ReservationOrder"
+                ],
+                "summary": "GetAll ReservationOrder",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "menu_item_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "quantity",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "reservation_id",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "GetAll Successful",
+                        "schema": {
+                            "$ref": "#/definitions/genprotos.GetAllReservationOrders"
+                        }
+                    },
+                    "401": {
+                        "description": "Error while GetAlld",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/reservationOrder/getbyid/{id}": {
             "get": {
                 "description": "GetById page",
@@ -933,6 +886,53 @@ const docTemplate = `{
                     },
                     "401": {
                         "description": "Error while GetByIdd",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/reservationOrder/update/{id}": {
+            "put": {
+                "description": "Update page",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "ReservationOrder"
+                ],
+                "summary": "Update ReservationOrder",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ReservationOrder ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update",
+                        "name": "Update",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/genprotos.ReservationOrder"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Update Successful",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Error while created",
                         "schema": {
                             "type": "string"
                         }

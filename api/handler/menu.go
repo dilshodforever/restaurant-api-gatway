@@ -41,7 +41,7 @@ func (h *Handler) CreateMenu(ctx *gin.Context) {
 // @Param   		Update  body    pb.Menu  true    "Update"
 // @Success 		200   {string}  string   "Update Successful"
 // @Failure 		401   {string}  string   "Error while created"
-// @Router			 /Menu/update/{id} [put]
+// @Router			 /menu/update/{id} [put]
 func (h *Handler) UpdateMenu(ctx *gin.Context) {
 	arr := pb.Menu{}
 	err := ctx.BindJSON(&arr)
@@ -64,7 +64,7 @@ func (h *Handler) UpdateMenu(ctx *gin.Context) {
 // @Param     		id    path    string  true    "Menu ID"
 // @Success 		200 {string}  string  "Delete Successful"
 // @Failure 		401 {string}  string  "Error while Deleted"
-// @Router 			/Menu/delete/{id} [delete]
+// @Router 			/menu/delete/{id} [delete]
 func (h *Handler) DeleteMenu(ctx *gin.Context) {
 	id := pb.ById{Id: ctx.Param("id")}
 	_, err := h.Menu.DeleteMenu(ctx, &id)
@@ -83,7 +83,7 @@ func (h *Handler) DeleteMenu(ctx *gin.Context) {
 // @Param 			query  query   pb.Menu true    "Query parameter"
 // @Success 		200  {object}  pb.GetAllMenus  "GetAll Successful"
 // @Failure 		401  {string}  string          "Error while GetAlld"
-// @Router 			/Menu/getall [get]
+// @Router 			/menu/getall [get]
 func (h *Handler) GetAllMenu(ctx *gin.Context) {
 	menu := &pb.Menu{}
 	menu.Name = ctx.Param("email")
@@ -107,7 +107,7 @@ func (h *Handler) GetAllMenu(ctx *gin.Context) {
 // @Param     		id     path    string     true   "Menu ID"
 // @Success 		200  {object}  pb.Menu   "GetById Successful"
 // @Failure 		401  {string}  string    "Error while GetByIdd"
-// @Router 			/Menu/getbyid/{id} [get]
+// @Router 			/menu/getbyid/{id} [get]
 func (h *Handler) GetByIdMenu(ctx *gin.Context) {
 	id := pb.ById{Id: ctx.Param("id")}
 	res, err := h.Menu.GetByIdMenu(ctx, &id)

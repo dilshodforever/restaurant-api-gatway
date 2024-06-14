@@ -39,7 +39,7 @@ func (h *Handler) CreateReservationOrder(ctx *gin.Context) {
 // @Param   				Update   body    pb.ReservationOrder  true   "Update"
 // @Success 				200    {string}  string  		     "Update Successful"
 // @Failure 				401    {string}  string  		     "Error while created"
-// @Router 					/ReservationOrder/update/{id} [put]
+// @Router 					/reservationOrder/update/{id} [put]
 func (h *Handler) UpdateReservationOrder(ctx *gin.Context) {
 	arr := pb.ReservationOrder{}
 	err := ctx.BindJSON(&arr)
@@ -62,7 +62,7 @@ func (h *Handler) UpdateReservationOrder(ctx *gin.Context) {
 // @Param     				id     path    string   true "ReservationOrder ID"
 // @Success 				200  {string}  string  "Delete Successful"
 // @Failure 				401  {string}  string  "Error while Deleted"
-// @Router 					/ReservationOrder/delete/{id} [delete]
+// @Router 					/reservationOrder/delete/{id} [delete]
 func (h *Handler) DeleteReservationOrder(ctx *gin.Context) {
 	id := pb.ById{Id: ctx.Param("id")}
 	_, err := h.ReservationOrder.DeleteReservationOrder(ctx, &id)
@@ -81,7 +81,7 @@ func (h *Handler) DeleteReservationOrder(ctx *gin.Context) {
 // @Param 					query  query   pb.ReservationOrder true    "Query parameter"
 // @Success 				200  {object}  pb.GetAllReservationOrders  "GetAll Successful"
 // @Failure 				401  {string}  string  					   "Error while GetAlld"
-// @Router 					/ReservationOrder/getall [get]
+// @Router 					/reservationOrder/getall [get]
 func (h *Handler) GetAllReservationOrder(ctx *gin.Context) {
 	reservationOrder := &pb.ReservationOrder{}
 	reservationOrder.Quantity = ctx.Param("quantity")

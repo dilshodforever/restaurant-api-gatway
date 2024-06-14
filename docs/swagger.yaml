@@ -111,7 +111,33 @@ info:
   description: Voting service
   version: "1.0"
 paths:
-  /Menu/delete/{id}:
+  /menu/create:
+    post:
+      consumes:
+      - application/json
+      description: Create page
+      parameters:
+      - description: Create
+        in: body
+        name: Create
+        required: true
+        schema:
+          $ref: '#/definitions/genprotos.Menu'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Create Successful
+          schema:
+            type: string
+        "401":
+          description: Error while Created
+          schema:
+            type: string
+      summary: Create Menu
+      tags:
+      - Menu
+  /menu/delete/{id}:
     delete:
       consumes:
       - application/json
@@ -136,7 +162,7 @@ paths:
       summary: Delete Menu
       tags:
       - Menu
-  /Menu/getall:
+  /menu/getall:
     get:
       consumes:
       - application/json
@@ -171,7 +197,7 @@ paths:
       summary: GetAll Menu
       tags:
       - Menu
-  /Menu/getbyid/{id}:
+  /menu/getbyid/{id}:
     get:
       consumes:
       - application/json
@@ -196,7 +222,7 @@ paths:
       summary: GetById Menu
       tags:
       - Menu
-  /Menu/update/{id}:
+  /menu/update/{id}:
     put:
       consumes:
       - application/json
@@ -227,7 +253,7 @@ paths:
       summary: Update Menu
       tags:
       - Menu
-  /Payment/create:
+  /payment/create:
     post:
       consumes:
       - application/json
@@ -253,7 +279,7 @@ paths:
       summary: Create Payment
       tags:
       - Payment
-  /Payment/delete/{id}:
+  /payment/delete/{id}:
     delete:
       consumes:
       - application/json
@@ -278,232 +304,6 @@ paths:
       summary: Delete Payment
       tags:
       - Payment
-  /Payment/getbyid/{id}:
-    get:
-      consumes:
-      - application/json
-      description: GetById page
-      parameters:
-      - description: Payment ID
-        in: path
-        name: id
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: GetById Successful
-          schema:
-            $ref: '#/definitions/genprotos.Payment'
-        "401":
-          description: Error while GetByIdd
-          schema:
-            type: string
-      summary: GetById Payment
-      tags:
-      - Payment
-  /Payment/update/{id}:
-    put:
-      consumes:
-      - application/json
-      description: Update page
-      parameters:
-      - description: Payment ID
-        in: path
-        name: id
-        required: true
-        type: string
-      - description: Update
-        in: body
-        name: Update
-        required: true
-        schema:
-          $ref: '#/definitions/genprotos.Payment'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Update Successful
-          schema:
-            type: string
-        "401":
-          description: Error while created
-          schema:
-            type: string
-      summary: Update Payment
-      tags:
-      - Payment
-  /Reservation/delete/{id}:
-    delete:
-      consumes:
-      - application/json
-      description: Delete page
-      parameters:
-      - description: Reservation ID
-        in: path
-        name: id
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Delete Successful
-          schema:
-            type: string
-        "401":
-          description: Error while Deleted
-          schema:
-            type: string
-      summary: Delete Reservation
-      tags:
-      - Reservation
-  /Reservation/update/{id}:
-    put:
-      consumes:
-      - application/json
-      description: Update page
-      parameters:
-      - description: Reservation ID
-        in: path
-        name: id
-        required: true
-        type: string
-      - description: Update
-        in: body
-        name: Update
-        required: true
-        schema:
-          $ref: '#/definitions/genprotos.Reservation'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Update Successful
-          schema:
-            type: string
-        "401":
-          description: Error while created
-          schema:
-            type: string
-      summary: Update Reservation
-      tags:
-      - Reservation
-  /ReservationOrder/delete/{id}:
-    delete:
-      consumes:
-      - application/json
-      description: Delete page
-      parameters:
-      - description: ReservationOrder ID
-        in: path
-        name: id
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Delete Successful
-          schema:
-            type: string
-        "401":
-          description: Error while Deleted
-          schema:
-            type: string
-      summary: Delete ReservationOrder
-      tags:
-      - ReservationOrder
-  /ReservationOrder/getall:
-    get:
-      consumes:
-      - application/json
-      description: GetAll page
-      parameters:
-      - in: query
-        name: id
-        type: string
-      - in: query
-        name: menu_item_id
-        type: string
-      - in: query
-        name: quantity
-        type: string
-      - in: query
-        name: reservation_id
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: GetAll Successful
-          schema:
-            $ref: '#/definitions/genprotos.GetAllReservationOrders'
-        "401":
-          description: Error while GetAlld
-          schema:
-            type: string
-      summary: GetAll ReservationOrder
-      tags:
-      - ReservationOrder
-  /ReservationOrder/update/{id}:
-    put:
-      consumes:
-      - application/json
-      description: Update page
-      parameters:
-      - description: ReservationOrder ID
-        in: path
-        name: id
-        required: true
-        type: string
-      - description: Update
-        in: body
-        name: Update
-        required: true
-        schema:
-          $ref: '#/definitions/genprotos.ReservationOrder'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Update Successful
-          schema:
-            type: string
-        "401":
-          description: Error while created
-          schema:
-            type: string
-      summary: Update ReservationOrder
-      tags:
-      - ReservationOrder
-  /menu/create:
-    post:
-      consumes:
-      - application/json
-      description: Create page
-      parameters:
-      - description: Create
-        in: body
-        name: Create
-        required: true
-        schema:
-          $ref: '#/definitions/genprotos.Menu'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Create Successful
-          schema:
-            type: string
-        "401":
-          description: Error while Created
-          schema:
-            type: string
-      summary: Create Menu
-      tags:
-      - Menu
   /payment/getall:
     get:
       consumes:
@@ -537,6 +337,62 @@ paths:
           schema:
             type: string
       summary: GetAll Payment
+      tags:
+      - Payment
+  /payment/getbyid/{id}:
+    get:
+      consumes:
+      - application/json
+      description: GetById page
+      parameters:
+      - description: Payment ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetById Successful
+          schema:
+            $ref: '#/definitions/genprotos.Payment'
+        "401":
+          description: Error while GetByIdd
+          schema:
+            type: string
+      summary: GetById Payment
+      tags:
+      - Payment
+  /payment/update/{id}:
+    put:
+      consumes:
+      - application/json
+      description: Update page
+      parameters:
+      - description: Payment ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Update
+        in: body
+        name: Update
+        required: true
+        schema:
+          $ref: '#/definitions/genprotos.Payment'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Update Successful
+          schema:
+            type: string
+        "401":
+          description: Error while created
+          schema:
+            type: string
+      summary: Update Payment
       tags:
       - Payment
   /public_vote/create:
@@ -627,6 +483,31 @@ paths:
       summary: Create Reservation
       tags:
       - Reservation
+  /reservation/delete/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete page
+      parameters:
+      - description: Reservation ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Delete Successful
+          schema:
+            type: string
+        "401":
+          description: Error while Deleted
+          schema:
+            type: string
+      summary: Delete Reservation
+      tags:
+      - Reservation
   /reservation/getall:
     get:
       consumes:
@@ -687,6 +568,94 @@ paths:
       summary: GetById Reservation
       tags:
       - Reservation
+  /reservation/update/{id}:
+    put:
+      consumes:
+      - application/json
+      description: Update page
+      parameters:
+      - description: Reservation ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Update
+        in: body
+        name: Update
+        required: true
+        schema:
+          $ref: '#/definitions/genprotos.Reservation'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Update Successful
+          schema:
+            type: string
+        "401":
+          description: Error while created
+          schema:
+            type: string
+      summary: Update Reservation
+      tags:
+      - Reservation
+  /reservationOrder/delete/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete page
+      parameters:
+      - description: ReservationOrder ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Delete Successful
+          schema:
+            type: string
+        "401":
+          description: Error while Deleted
+          schema:
+            type: string
+      summary: Delete ReservationOrder
+      tags:
+      - ReservationOrder
+  /reservationOrder/getall:
+    get:
+      consumes:
+      - application/json
+      description: GetAll page
+      parameters:
+      - in: query
+        name: id
+        type: string
+      - in: query
+        name: menu_item_id
+        type: string
+      - in: query
+        name: quantity
+        type: string
+      - in: query
+        name: reservation_id
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetAll Successful
+          schema:
+            $ref: '#/definitions/genprotos.GetAllReservationOrders'
+        "401":
+          description: Error while GetAlld
+          schema:
+            type: string
+      summary: GetAll ReservationOrder
+      tags:
+      - ReservationOrder
   /reservationOrder/getbyid/{id}:
     get:
       consumes:
@@ -710,6 +679,37 @@ paths:
           schema:
             type: string
       summary: GetById ReservationOrder
+      tags:
+      - ReservationOrder
+  /reservationOrder/update/{id}:
+    put:
+      consumes:
+      - application/json
+      description: Update page
+      parameters:
+      - description: ReservationOrder ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Update
+        in: body
+        name: Update
+        required: true
+        schema:
+          $ref: '#/definitions/genprotos.ReservationOrder'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Update Successful
+          schema:
+            type: string
+        "401":
+          description: Error while created
+          schema:
+            type: string
+      summary: Update ReservationOrder
       tags:
       - ReservationOrder
   /restoran/create:

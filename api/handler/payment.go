@@ -17,7 +17,7 @@ type Payments struct{
 // @Param   		Create   body    pb.Payment    true   "Create"
 // @Success 		200    {string}  string       "Create Successful"
 // @Failure 		401    {string}  string       "Error while Created"
-// @Router 			/Payment/create [post]
+// @Router 			/payment/create [post]
 func (h *Handler) CreatePayment(ctx *gin.Context) {
 	arr := pb.Payment{}
 	err := ctx.BindJSON(&arr)
@@ -41,7 +41,7 @@ func (h *Handler) CreatePayment(ctx *gin.Context) {
 // @Param   		Update   body    pb.Payment   true   "Update"
 // @Success 		200    {string}  string      "Update Successful"
 // @Failure 		401    {string}  string      "Error while created"
-// @Router 			/Payment/update/{id} [put]
+// @Router 			/payment/update/{id} [put]
 func (h *Handler) UpdatePayment(ctx *gin.Context) {
 	arr := pb.Payment{}
 	err := ctx.BindJSON(&arr)
@@ -64,7 +64,7 @@ func (h *Handler) UpdatePayment(ctx *gin.Context) {
 // @Param     		id    path    string   true   "Payment ID"
 // @Success 		200 {string}  string  "Delete Successful"
 // @Failure 		401 {string}  string  "Error  while Deleted"
-// @Router 			/Payment/delete/{id} [delete]
+// @Router 			/payment/delete/{id} [delete]
 func (h *Handler) DeletePayment(ctx *gin.Context) {
 	id := pb.ById{Id: ctx.Param("id")}
 	_, err := h.Payment.DeletePayment(ctx, &id)
@@ -116,7 +116,7 @@ func (h *Handler) GetAllPayment(ctx *gin.Context) {
 // @Param     		id     path    string true  "Payment ID"
 // @Success 		200  {object}  pb.Payment   "GetById Successful"
 // @Failure 		401  {string}  string       "Error while GetByIdd"
-// @Router 			/Payment/getbyid/{id} [get]
+// @Router 			/payment/getbyid/{id} [get]
 func (h *Handler) GetByIdPayment(ctx *gin.Context) {
 	id := pb.ById{Id: ctx.Param("id")}
 	res, err := h.Payment.GetByIdPayment(ctx, &id)
