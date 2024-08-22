@@ -25,6 +25,7 @@ jobs:
         script: |
           pwd
           ls
-          cd projects/api-getway/
-          go run main.go
+          cd /home/najmiddin/projects/restaurant/restaurant-api-gatway
+          sudo docker compose up -d
+          
           

@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+
+  # api-restaurant
+  api-restaurant:
+    container_name: api-restaurant
+    build: ./
+    ports:
+      - "8080:8080"
